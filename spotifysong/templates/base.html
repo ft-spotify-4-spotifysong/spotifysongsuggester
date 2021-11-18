@@ -1,26 +1,39 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 
 <head>
-    <title>Spotify Song - {{ title }}</title>
+    <title>Spotify Song</title>
 </head>
 
-<body>
-    <article class="flex two" style="padding: 3em 1em;">
-        {% block content %}
-        <div>
-            <h1>{{ title }}</h1>
-            <form action="/suggestsong" method="post">
-                <select name="songname">
-                    {% for s in songs %}
-                    <option value="{{ s }}">{{ s }}</option>
-                    {% endfor %}
-                </select>
-                <input type="text" name="suggest_songs_number" placeholder="number of songs suggested">
-                <input type="submit" value="Select a song">
-            </form>
-        </div>
-        {% endblock %}
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Intro -->
+        <section class="intro">
+            <header>
+                <h1>Spotify Song Suggester</h1>
+                <p>Help users find and visualize songs that fit their personal taste.</p>
+            </header>
+            {% block content %}
+            <div>
+                <h3>
+                    Select a song from the list:
+                </h3>
+                <form action="/suggestsong" method="post">
+                    <select name="songname">
+                        {% for s in songs %}
+                        <option value="{{ s }}">{{ s }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="suggest_songs_number" placeholder="number of songs suggested">
+                    <input type="submit" value="Get suggestions">
+                </form>
+            </div>
+            {% endblock %}
+        </section>
+    </div>
 </body>
 
 </html>

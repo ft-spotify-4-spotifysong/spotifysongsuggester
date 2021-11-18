@@ -2,8 +2,8 @@
 
 {% block content %}
 <div id="suggestedsongs">
-    <h2>suggested songs</h2>
-    {% for s in suggest_songs_info %}
+    <h2>Suggested songs for song ------> {{songname}}</h2>
+    {% for s in suggested_songs_info %}
     <p>{{ s }}</p>
     {% endfor %}
 </div>

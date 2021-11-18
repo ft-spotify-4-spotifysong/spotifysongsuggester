@@ -8,9 +8,10 @@ from sklearn import neighbors
 
 example_song = 'Sleep Now In the Fire'
 
-
 def suggester(song_name, songs_df, neighbors_number):
     '''get similar songs'''
+
+    songs_df = songs_df.sort_values(by=['name'])
 
     if song_name not in songs_df['name'].to_list():
         return None
