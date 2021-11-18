@@ -11,7 +11,11 @@
         <div>
             <h1>{{ title }}</h1>
             <form action="/suggestsong" method="post">
-                <input type="text" name="songname" placeholder="song name">
+                <select name="songname">
+                    {% for s in songs %}
+                    <option value="{{ s }}">{{ s }}</option>
+                    {% endfor %}
+                </select>
                 <input type="text" name="suggest_songs_number" placeholder="number of songs suggested">
                 <input type="submit" value="Select a song">
             </form>

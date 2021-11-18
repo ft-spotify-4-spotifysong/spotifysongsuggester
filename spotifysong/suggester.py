@@ -31,9 +31,7 @@ def suggester(song_name, songs_df, neighbors_number):
 
     suggest_songs = []
     distance, neighbors_indexes = model.kneighbors(select_song_array)
-    model_output = pd.DataFrame(
-        {'distance': list(distance[0]), 'neighbors': list(neighbors_indexes[0])})
-    model_output.to_csv('model_output.csv')
+
     if distance == []:
         return []
 
@@ -44,5 +42,9 @@ def suggester(song_name, songs_df, neighbors_number):
     suggest_songs_df = pd.DataFrame(
         data=suggest_songs, columns=['name'])
 
-    print('suggest songs: ', suggest_songs_df)
-    return suggest_songs_df
+    output = pd.DataFrame(
+        {'songname': suggest_songs, 'distance': list(distance[0][1:]), 'neighbors': list(neighbors_indexes[0][1:])})
+    output.to_csv('output.csv')
+
+    print('suggest songs: ', output)
+    return output

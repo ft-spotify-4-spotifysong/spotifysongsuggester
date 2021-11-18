@@ -3,8 +3,8 @@
 {% block content %}
 <div id="suggestedsongs">
     <h2>suggested songs</h2>
-    {% for song in suggest_songs %}
-    <p>{{ song }}</p>
+    {% for s in suggest_songs_info %}
+    <p>{{ s }}</p>
     {% endfor %}
 </div>
 {% endblock %}
