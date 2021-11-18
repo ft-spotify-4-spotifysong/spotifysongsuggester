@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Spotify Song - {{ title }}</title>
+</head>
+
+<body>
+    <article class="flex two" style="padding: 3em 1em;">
+        {% block content %}
+        <div>
+            <h1>{{ title }}</h1>
+            <form action="/suggestsong" method="post">
+                <input type="text" name="songname" placeholder="song name">
+                <input type="text" name="suggest_songs_number" placeholder="number of songs suggested">
+                <input type="submit" value="Select a song">
+            </form>
+        </div>
+        {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="suggestedsongs">
+    <h2>suggested songs</h2>
+    {% for song in suggest_songs %}
+    <p>{{ song }}</p>
+    {% endfor %}
+</div>
+{% endblock %}

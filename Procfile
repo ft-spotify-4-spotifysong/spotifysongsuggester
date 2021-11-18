@@ -1,0 +1,1 @@
+web: gunicorn spotifysong:APP -t 120
