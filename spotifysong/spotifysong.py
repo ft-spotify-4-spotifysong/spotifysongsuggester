@@ -7,7 +7,7 @@ from .suggester import suggester
 
 def create_app():
 
-    df = pd.read_csv('spotify/spotify.csv')
+    df = pd.read_csv('spotifysong/spotify.csv')
     songs = df['name'].to_list()
     for s in songs:
         print('------', type(s))
