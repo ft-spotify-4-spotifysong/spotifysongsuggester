@@ -19,7 +19,7 @@
             {% block content %}
             <div>
                 <h3>
-                    Select a song from the list:
+                    I want similar songs with this song (please select a song from the list):
                 </h3>
                 <form action="/suggestsong" method="post">
                     <select name="songname">
@@ -27,14 +27,20 @@
                         <option value="{{ s }}">{{ s }}</option>
                         {% endfor %}
                     </select>
+                    <h3>
+                        I want
+                    </h3>
                     <input type="text" name="suggest_songs_number" placeholder="number of songs suggested">
+                    <h3>
+                        more songs
+                    </h3>
                     <input type="submit" value="Get suggestions">
                 </form>
             </div>
 
             <div>
                 <h3>
-                    Recent favorite songs:
+                    Last time suggested songs of favorite song :
                 </h3>
                 {% for sr in recent_songs_info %}
                 <p>{{ sr }}</p>

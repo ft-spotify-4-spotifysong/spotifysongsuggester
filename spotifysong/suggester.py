@@ -39,7 +39,7 @@ def suggester(song_name, songs_df, neighbors_number):
             'artists': suggest_songs_artists,
          'distance': list(distance[0]),
          'neighbors': list(neighbors_indexes[0])})
-    # output.to_csv('output.csv')
+    output.to_csv('output.csv')
 
     print('suggest songs: ', output)
     return output

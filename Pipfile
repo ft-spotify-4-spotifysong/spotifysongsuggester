@@ -11,6 +11,8 @@ flask = "*"
 sklearn = "*"
 python-dotenv = "*"
 flask-sqlalchemy = "*"
+matplotlib = "*"
+seaborn = "*"
 
 [dev-packages]
 
