@@ -10,6 +10,7 @@ numpy = "*"
 flask = "*"
 sklearn = "*"
 python-dotenv = "*"
+flask-sqlalchemy = "*"
 
 [dev-packages]
 

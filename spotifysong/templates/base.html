@@ -31,6 +31,15 @@
                     <input type="submit" value="Get suggestions">
                 </form>
             </div>
+
+            <div>
+                <h3>
+                    Recent favorite songs:
+                </h3>
+                {% for sr in recent_songs_info %}
+                <p>{{ sr }}</p>
+                {% endfor %}
+            </div>
             {% endblock %}
         </section>
     </div>

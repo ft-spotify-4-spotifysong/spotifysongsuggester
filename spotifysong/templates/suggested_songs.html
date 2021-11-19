@@ -2,7 +2,9 @@
 
 {% block content %}
 <div id="suggestedsongs">
-    <h2>Suggested songs for song ------> {{songname}}</h2>
+    <h2>Your Selected Song: {{select_song_info}}</h2>
+    <p>{{ selected_song_info }}</p>
+    <h2>Suggested Songs For you:</h2>
     {% for s in suggested_songs_info %}
     <p>{{ s }}</p>
     {% endfor %}
