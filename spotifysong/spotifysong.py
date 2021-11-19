@@ -12,7 +12,7 @@ from .plot import plot_correlation, plot_distance
 def create_app():
 
     #df = pd.read_csv('songs.csv')  # local flask run
-    df = pd.read_csv('spofitysong/songs.csv')  # for Heroku deploy
+    df = pd.read_csv('spotifysong/songs.csv')  # for Heroku deploy
     songs = df.sort_values(by=['name'])['name'].to_list()
     for s in songs:
         print('------', type(s))
