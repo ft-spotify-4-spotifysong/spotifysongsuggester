@@ -5,12 +5,13 @@ import numpy as np
 from flask import Flask, render_template, request
 from .suggester import suggester
 from .models import DB, Song
-#from .plot import plot_1, plot_2
+import os
+from .plot import plot_correlation, plot_distance
 
 
 def create_app():
 
-    # df = pd.read_csv('songs.csv')  # local flask run
+    #df = pd.read_csv('songs.csv')  # local flask run
     df = pd.read_csv('spotifysong/songs.csv')  # for Heroku deploy
     songs = df.sort_values(by=['name'])['name'].to_list()
     for s in songs:
@@ -18,7 +19,8 @@ def create_app():
         print(s)
         break
 
-    APP = Flask(__name__, static_url_path='')
+    #APP = Flask(__name__, static_url_path='', static_folder='/static')
+    APP = Flask(__name__)
     APP.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
     APP.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -79,10 +81,8 @@ def create_app():
                         DB.session.add(db_song)
                         i += 1
                     DB.session.commit()
-                    # plot_1()
-                    # plot_2()
-                    #img_stream1 = return_image_stream('static/output1.png')
-                    #img_stream2 = return_image_stream('static/output1.png')
+                    plot_correlation()
+                    #plot_distance()
             except Exception as e:
                 return str(e)
         return render_template('suggested_songs.html',

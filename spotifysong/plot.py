@@ -1,19 +1,34 @@
+'''graph generation'''
+
+import matplotlib
+matplotlib.use('Agg')
 #from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+from pylab import rcParams
 import seaborn as sns
 import pandas as pd
 
-df = pd.read_csv('spotify/output.csv')
-df = df.drop(columns='Unnamed: 0')
+
+def plot_correlation():
+    '''
+    plot correlation's matrix to explore dependency between features 
+    '''
+    # init figure size
+    data = pd.read_csv('spotifysong/correlation.csv').drop(columns=['Unnamed: 0'])
+    #data = pd.read_csv('spotifysong/graph_array.csv').drop(columns=['Unnamed: 0'])
+    rcParams['figure.figsize'] = 15, 20
+    fig = plt.figure()
+    sns.heatmap(data.corr(), annot=True, fmt=".2f")
+    fig.savefig('spotifysong/static/corr.png')
 
 
-def plot_1():
-    sns.set_theme(style='darkgrid')
-    sns_plot = sns.catplot(x='distance', y='name', data=df)
-    sns_plot.figure.savefig("spotify/static/output1.png")
+def plot_distance():
+    df = pd.read_csv('spotifysong/output.csv')
+    #df = pd.read_csv('output.csv').head(10)
+    df = df.drop(columns='Unnamed: 0')
+    fig = plt.figure()
+    #ax = sns.set_theme(style='darkgrid')
+    sns.catplot(x='distance', y='name', data=df)
+    #canvas = FigureCanvas(fig)
+    fig.savefig('spotifysong/static/distance.png')
 
-
-def plot_2():
-    sns.set_theme(style='darkgrid')
-    sns_plot = sns.barplot(x='distance', y='name', data=df)
-    sns_plot.figure.savefig("spotify/static/output2.png")

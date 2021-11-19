@@ -1,7 +1,7 @@
 '''suggest songs according to user's input song'''
 import pandas as pd
 import numpy as np
-from sklearn import preprocessing
+#from sklearn import preprocessing
 from sklearn import neighbors
 
 
@@ -28,6 +28,7 @@ def suggester(song_name, songs_df, neighbors_number):
     if distance == []:
         return []
 
+    # prepare output file for suggested songs
     suggest_songs,  suggest_songs_album, suggest_songs_artists = [], [], []
     for index_i in neighbors_indexes[0]:
         suggest_songs.append(songs_df['name'].iloc[index_i])
@@ -40,6 +41,13 @@ def suggester(song_name, songs_df, neighbors_number):
          'distance': list(distance[0]),
          'neighbors': list(neighbors_indexes[0])})
     output.to_csv('output.csv')
+    #print('suggest songs: ', output)
 
-    print('suggest songs: ', output)
+    # prepare correlation graph array for suggested songs
+    check_arrays = X[neighbors_indexes[0], :]
+    graph_array = neighbors.kneighbors_graph(check_arrays, 10, mode='connectivity',
+                                             include_self=True).toarray()
+    print('------graph array:', graph_array)
+    pd.DataFrame(graph_array, columns=suggest_songs).to_csv('correlation.csv')
+
     return output

@@ -1,13 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<body>
+
+</body>
 <div id="suggestedsongs">
     <h2>For my favorite song </h2>
     <p>{{selected_song_info}}</p>
     <form action="/suggestsongsinfo">
         <input type="submit" value="Get album and artists of all suggested songs">
+        <h3>Top 10 songs correlation and distance from selected song images</h3>
+        <img src="{{ url_for('static', filename='corr.png') }}" />
     </form>
-    <h2>Top {{num}} similar songs</h2>
+    <h2>Top {{num}} similar songs names</h2>
     {% for name in suggested_songs_names %}
     <p>{{ name }}</p>
     {% endfor %}
