@@ -81,7 +81,7 @@ def create_app():
                         i += 1
                     DB.session.commit()
                     plot_correlation()
-                    #plot_distance()
+                    plot_distance()
             except Exception as e:
                 return str(e)
         return render_template('suggested_songs.html',

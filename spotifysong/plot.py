@@ -2,7 +2,7 @@
 
 import matplotlib
 matplotlib.use('Agg')
-#from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import matplotlib.pyplot as plt
 from pylab import rcParams
 import seaborn as sns
@@ -15,7 +15,7 @@ def plot_correlation():
     '''
     # init figure size
     data = pd.read_csv('spotifysong/correlation.csv').drop(columns=['Unnamed: 0'])
-    #data = pd.read_csv('graph_array.csv').drop(columns=['Unnamed: 0'])
+    #data = pd.read_csv('correlation.csv').drop(columns=['Unnamed: 0'])
     rcParams['figure.figsize'] = 15, 20
     fig = plt.figure()
     sns.heatmap(data.corr(), annot=True, fmt=".2f")
@@ -23,13 +23,14 @@ def plot_correlation():
 
 
 def plot_distance():
-    df = pd.read_csv('spotifysong/output.csv').iloc[:10,:]
-    #df = pd.read_csv('output.csv').iloc[:10,:]
+    df = pd.read_csv('spotifysong/output.csv').iloc[1:11,:]
+    #df = pd.read_csv('output.csv').iloc[1:11,:]
     df = df.drop(columns='Unnamed: 0')
     print('df--------', df)
-    fig = plt.figure()
-    #ax = sns.set_theme(style='darkgrid')
-    sns.catplot(x='distance', y='name', data=df)
+    fig, ax = plt.subplots(figsize=(8,8))
+    ax = sns.set_theme(style='darkgrid')
+    snsf = sns.catplot(x='distance', y='name', data=df)
+    snsf.figure.savefig('static/distance.png')
     #canvas = FigureCanvas(fig)
-    fig.savefig('static/distance.png')
+    #fig.savefig('static/distance.png')
 
