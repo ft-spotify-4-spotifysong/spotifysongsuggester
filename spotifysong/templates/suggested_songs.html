@@ -7,7 +7,7 @@
     <form action="/suggestsongsinfo">
         <input type="submit" value="Get album and artists of all suggested songs">
     </form>
-    <h2>Following songs are similar</h2>
+    <h2>Top {{num}} similar songs</h2>
     {% for name in suggested_songs_names %}
     <p>{{ name }}</p>
     {% endfor %}

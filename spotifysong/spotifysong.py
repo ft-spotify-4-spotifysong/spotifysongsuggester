@@ -10,8 +10,8 @@ from .models import DB, Song
 
 def create_app():
 
-    #df = pd.read_csv('songs.csv')  # local flask run
-    df = pd.read_csv('spotifysong/songs.csv')  # for Heroku deploy
+    df = pd.read_csv('songs.csv')  # local flask run
+    # df = pd.read_csv('spotifysong/songs.csv')  # for Heroku deploy
     songs = df.sort_values(by=['name'])['name'].to_list()
     for s in songs:
         print('------', type(s))
@@ -56,8 +56,10 @@ def create_app():
         else:
             # require similar songs for input song
             try:
-                num = int(suggest_songs_number)
-                print(songn, suggest_songs_number)
+                if suggest_songs_number == '':
+                    num = 20
+                else:
+                    num = int(suggest_songs_number)
                 response = suggester(songn, df, num)
                 if response.empty:
                     return 'Similar songs are not founded'
@@ -66,7 +68,7 @@ def create_app():
                     selected_song = songs_info.iloc[0].values
                     selected_song_info = f'SONG NAME: {selected_song[0]}-------ALBUM: {selected_song[1]}-------ARTIST: {selected_song[2][1:len(selected_song[2])-1]}'
                     suggested_songs = songs_info.iloc[1:].values
-                    suggested_songs_names = songs_info['name'].to_list()
+                    suggested_songs_names = songs_info['name'].to_list()[1:]
                     # refresh database table with suggested songs
                     DB.drop_all()
                     DB.create_all()
@@ -85,7 +87,7 @@ def create_app():
                 return str(e)
         return render_template('suggested_songs.html',
                                selected_song_info=selected_song_info,
-                               suggested_songs_names=suggested_songs_names)
+                               suggested_songs_names=suggested_songs_names, num=len(suggested_songs_names))
         # img_stream1=img_stream1, img_stream2=img_stream2)
 
     @APP.route('/suggestsongsinfo')
@@ -95,7 +97,8 @@ def create_app():
         print('suggestedsongsinfo -------', suggested_songs)
         suggested_songs_info = [
             f'SONG NAME: {s2.name}-------ALBUM: {s2.album}-------ARTIST: {s2.artists}' for s2 in suggested_songs]
-        return render_template('suggested_songs_info.html', suggested_songs_info=suggested_songs_info)
+        num = len(suggested_songs_info)
+        return render_template('suggested_songs_info.html', suggested_songs_info=suggested_songs_info, num=num)
 
     @APP.route('/reset')
     def reset():

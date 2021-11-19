@@ -1,8 +1,6 @@
-{% extends "suggested_songs.html" %}
-
 {% block content %}
 <div id="suggestedsongsinfo">
-    <h2>Songs information </h2>
+    <h2>Top {{num}} similar songs information </h2>
     {% for s in suggested_songs_info %}
     <p>{{ s }}</p>
     {% endfor %}
