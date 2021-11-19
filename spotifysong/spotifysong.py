@@ -12,7 +12,7 @@ from .plot import plot_correlation, plot_distance
 def create_app():
 
     #df = pd.read_csv('songs.csv')  # local flask run
-    df = pd.read_csv('spotifysong/songs.csv')  # for Heroku deploy
+    df = pd.read_csv('spofitysong/songs.csv')  # for Heroku deploy
     songs = df.sort_values(by=['name'])['name'].to_list()
     for s in songs:
         print('------', type(s))
@@ -52,7 +52,6 @@ def create_app():
         # songn = request.form.get('songname').strip()
         songn = request.form.get('songname')
         suggest_songs_number = request.form.get('suggest_songs_number')
-        img_stream1, img_stream2 = '', ''
         if songn not in df['name'].to_list():
             return 'Sorry, song is not exist'
         else:
@@ -88,7 +87,6 @@ def create_app():
         return render_template('suggested_songs.html',
                                selected_song_info=selected_song_info,
                                suggested_songs_names=suggested_songs_names, num=len(suggested_songs_names))
-        # img_stream1=img_stream1, img_stream2=img_stream2)
 
     @APP.route('/suggestsongsinfo')
     def suggestsongsinfo():
