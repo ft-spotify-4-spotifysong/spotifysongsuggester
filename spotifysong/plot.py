@@ -19,7 +19,7 @@ def plot_correlation():
     rcParams['figure.figsize'] = 15, 20
     fig = plt.figure()
     sns.heatmap(data.corr(), annot=True, fmt=".2f")
-    fig.savefig('static/corr.png')
+    fig.savefig('spotifysong/static/corr.png')
 
 
 def plot_distance():
@@ -30,7 +30,7 @@ def plot_distance():
     fig, ax = plt.subplots(figsize=(8,8))
     ax = sns.set_theme(style='darkgrid')
     snsf = sns.catplot(x='distance', y='name', data=df)
-    snsf.figure.savefig('static/distance.png')
+    snsf.figure.savefig('spotifysong/static/distance.png')
     #canvas = FigureCanvas(fig)
     #fig.savefig('static/distance.png')
 
