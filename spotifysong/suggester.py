@@ -44,10 +44,10 @@ def suggester(song_name, songs_df, neighbors_number):
     #print('suggest songs: ', output)
 
     # prepare correlation graph array for suggested songs
-    check_arrays = X[neighbors_indexes[0][:11]]
+    check_arrays = X[neighbors_indexes[0]]
     graph_array = neighbors.kneighbors_graph(check_arrays, 10, mode='connectivity',
                                              include_self=True).toarray()
     print('------graph array:', graph_array)
-    pd.DataFrame(graph_array, columns=suggest_songs[:11]).to_csv('spotifysong/correlation.csv')
+    pd.DataFrame(graph_array, columns=suggest_songs).to_csv('spotifysong/correlation.csv')
 
     return output
