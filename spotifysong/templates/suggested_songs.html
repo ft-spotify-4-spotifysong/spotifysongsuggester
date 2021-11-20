@@ -10,7 +10,7 @@
     <p>{{selected_song_info}}</p>
     <form action="/suggestsongsinfo">
         <input type="submit" value="Get album and artists of all suggested songs", size=300>
-        <h3>Top 10 suggested songs correlation and distance from selected song images</h3>
+        <h3>Top 10 suggested songs distance from selected song images</h3>
         <img src="{{ url_for('static', filename='distance.png') }}" height="600" width="600"/>
     </form>
     <h2>Top {{num}} similar songs names</h2>
